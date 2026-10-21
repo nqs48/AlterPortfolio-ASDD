@@ -1,0 +1,62 @@
+<section id="contacto" class="section">
+  <div class="container contact">
+    <div class="info" appReveal>
+      <span class="eyebrow">// contacto</span>
+      <h2 class="section-title">¿Tienes un proyecto en mente?</h2>
+      <p class="section-subtitle">
+        Cuéntame qué quieres construir. Respondo en menos de 48 horas, ya sea una oportunidad laboral, un proyecto
+        freelance o simplemente para conversar de tecnología.
+      </p>
+
+      <a class="email" [href]="'mailto:' + profile.email">
+        <app-icon name="mail" [size]="20" /> {{ profile.email }}
+      </a>
+
+      <ul class="socials">
+        @for (social of profile.socials; track social.label) {
+          <li>
+            <a class="btn btn-ghost" [href]="social.url" target="_blank" rel="noopener">
+              <app-icon [name]="social.icon" [size]="18" /> {{ social.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <form class="card form" [formGroup]="form" (ngSubmit)="submit()" novalidate appReveal [revealDelay]="120">
+      <div class="field">
+        <label for="name">Nombre</label>
+        <input id="name" type="text" formControlName="name" autocomplete="name" [class.error]="invalid('name')" />
+        @if (invalid('name')) {
+          <small>Escribe tu nombre (mínimo 2 caracteres).</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="email">Correo</label>
+        <input id="email" type="email" formControlName="email" autocomplete="email" [class.error]="invalid('email')" />
+        @if (invalid('email')) {
+          <small>Escribe un correo válido.</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="message">Mensaje</label>
+        <textarea id="message" rows="5" formControlName="message" [class.error]="invalid('message')"></textarea>
+        @if (invalid('message')) {
+          <small>El mensaje debe tener al menos 10 caracteres.</small>
+        }
+      </div>
+
+      <button class="btn btn-primary" type="submit">
+        <app-icon name="send" [size]="18" /> Enviar mensaje
+      </button>
+
+      @if (sent()) {
+        <p class="success" role="status">
+          <app-icon name="check" [size]="18" /> Se abrió tu cliente de correo con el mensaje listo para enviar.
+        </p>
+      }
+    </form>
+  </div>
+</section>

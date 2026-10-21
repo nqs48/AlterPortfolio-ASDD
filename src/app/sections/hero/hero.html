@@ -1,0 +1,54 @@
+<section id="inicio" class="hero">
+  <div class="container hero-grid">
+    <div class="intro">
+      @if (profile.available) {
+        <span class="status"><span class="dot"></span> Disponible para nuevos proyectos</span>
+      }
+
+      <h1>
+        Hola, soy <span class="highlight">{{ profile.name }}</span>
+      </h1>
+      <p class="role">{{ profile.role }}</p>
+      <p class="tagline">{{ profile.tagline }}</p>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#proyectos">
+          Ver proyectos <app-icon name="arrow-right" [size]="18" />
+        </a>
+        <a class="btn btn-ghost" [href]="profile.cvUrl" download>
+          <app-icon name="download" [size]="18" /> Descargar CV
+        </a>
+      </div>
+
+      <div class="meta">
+        <span><app-icon name="map-pin" [size]="16" /> {{ profile.location }}</span>
+        <ul class="socials">
+          @for (social of profile.socials; track social.label) {
+            <li>
+              <a [href]="social.url" target="_blank" rel="noopener" [attr.aria-label]="social.label">
+                <app-icon [name]="social.icon" [size]="18" />
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="code-window card" aria-hidden="true">
+      <div class="window-bar">
+        <span></span><span></span><span></span>
+        <p>developer.ts</p>
+      </div>
+      <pre><code><span class="kw">const</span> <span class="var">developer</span> = &#123;
+  <span class="key">nombre</span>: <span class="str">'{{ profile.name }}'</span>,
+  <span class="key">rol</span>: <span class="str">'{{ profile.role }}'</span>,
+  <span class="key">frontend</span>: [@for (s of frontend; track s; let last = $last) {<span class="str">'{{ s }}'</span>@if (!last) {, }}],
+  <span class="key">backend</span>: [@for (s of backend; track s; let last = $last) {<span class="str">'{{ s }}'</span>@if (!last) {, }}],
+  <span class="key">ia</span>: [@for (s of ai; track s; let last = $last) {<span class="str">'{{ s }}'</span>@if (!last) {, }}],
+  <span class="key">disponible</span>: <span class="kw">{{ profile.available }}</span>,
+&#125;;
+
+<span class="fn">construir</span>(<span class="var">developer</span>, <span class="str">'la próxima solución'</span>);</code></pre>
+    </div>
+  </div>
+</section>

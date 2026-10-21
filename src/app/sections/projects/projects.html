@@ -1,0 +1,70 @@
+<section id="proyectos" class="section">
+  <div class="container">
+    <header class="section-header" appReveal>
+      <span class="eyebrow">// proyectos</span>
+      <h2 class="section-title">Trabajo seleccionado</h2>
+      <p class="section-subtitle">Soluciones en las que he trabajado para clientes y durante mi formación.</p>
+    </header>
+
+    <div class="filters" role="group" aria-label="Filtrar proyectos">
+      @for (filter of filters; track filter) {
+        <button
+          type="button"
+          [class.active]="selected() === filter"
+          [attr.aria-pressed]="selected() === filter"
+          (click)="selected.set(filter)"
+        >
+          {{ filter }} <span class="count">{{ count(filter) }}</span>
+        </button>
+      }
+    </div>
+
+    <div class="grid">
+      @for (project of visible(); track project.title; let i = $index) {
+        <article class="card project" [class.featured]="project.featured" appReveal [revealDelay]="(i % 3) * 80">
+          <div class="top">
+            <span class="category">{{ project.category }}</span>
+            @if (project.featured) {
+              <span class="badge">Destacado</span>
+            }
+          </div>
+
+          <h3>{{ project.title }}</h3>
+          @if (project.client) {
+            <p class="client">{{ project.client }}</p>
+          }
+          <p class="summary">{{ project.summary }}</p>
+
+          <ul class="highlights">
+            @for (item of project.highlights; track item) {
+              <li><app-icon name="check" [size]="16" /> {{ item }}</li>
+            }
+          </ul>
+
+          <ul class="stack">
+            @for (tech of project.stack; track tech) {
+              <li class="tag">{{ tech }}</li>
+            }
+          </ul>
+
+          @if (project.repoUrl || project.demoUrl) {
+          <div class="links">
+            @if (project.repoUrl) {
+              <a [href]="project.repoUrl" target="_blank" rel="noopener">
+                <app-icon name="github" [size]="18" /> Código
+              </a>
+            }
+            @if (project.demoUrl) {
+              <a [href]="project.demoUrl" target="_blank" rel="noopener">
+                <app-icon name="external" [size]="18" /> Demo
+              </a>
+            }
+          </div>
+          }
+        </article>
+      } @empty {
+        <p class="empty">No hay proyectos en esta categoría todavía.</p>
+      }
+    </div>
+  </div>
+</section>
