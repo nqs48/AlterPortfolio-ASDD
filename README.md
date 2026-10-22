@@ -1,5 +1,7 @@
 # Portafolio — Desarrollador Fullstack
 
+**Sitio publicado:** https://alterportfolio-asdd.vercel.app
+
 Portafolio personal hecho con Angular 21 (componentes standalone, signals y control flow `@if` / `@for`), sin librerías de UI.
 
 ## Requisitos
@@ -42,3 +44,7 @@ src/app/
 ## Formulario de contacto
 
 Sin backend, el formulario valida los campos y abre el cliente de correo con el mensaje listo. Para enviar desde el sitio, cambia el método `submit()` en `src/app/sections/contact/contact.ts` por una llamada a tu propia API o a un servicio como Formspree.
+
+## Despliegue
+
+El proyecto está conectado a Vercel (equipo ADev, proyecto `alterportfolio-asdd`): cada push a `main` se publica automáticamente en producción, y las demás ramas generan un despliegue de vista previa. La configuración del build está en `vercel.json`.
